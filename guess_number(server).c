@@ -111,7 +111,7 @@ int main() {
 	s = socket(AF_INET, SOCK_STREAM, 0);
 	if (s < 0) {
 		fprintf(stderr, "ERROR ON CREATE SERVER SOCKET!\n");
-		return 1
+		return 1;
 	}
 
 	memset(&server, 0, sizeof(server));
@@ -121,7 +121,7 @@ int main() {
 
 	code = bind(s, (struct sockaddr*)&server, sizeof(server));
 	if (code < 0) {
-		fprintf(stderr, "ERROR ON BIMD SERVER SOCKET!\n");
+		fprintf(stderr, "ERROR ON BIND SERVER SOCKET!\n");
 		return 1;
 	}
 
@@ -131,12 +131,13 @@ int main() {
 
 	while (1) {
 
-		memset(&client, 0, sizeof(client));
-
-		int len = sizeof(client);
+		memset((struct sockaddr*)&client, 0, sizeof(client));
 
 		printf("Waiting for connection...");
+
+		int len = sizeof(client);
 		c = accept(s, (struct sockaddr*)&client, (socklen_t*)&len);
+
 		printf("Incoming from %s:%d\n", inet_ntoa(client.sin_addr), nthos(client.sin_port));
 
 		if (fork() == 0) {

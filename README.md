@@ -4,7 +4,7 @@ How it works:
 
 Server generates a random number from 1 to 10, and the connected clients try to guess it within 10 tries.
 
-After each guess, client receives one of three messages from the server:
+After each guess, client receives one of four messages from the server:
 
 - B - bigger	(the generated number is bigger than the one the client provided)
 - S - smaller	(the generated number is smaller than the one the client provided)
